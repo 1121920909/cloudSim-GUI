@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="example.basic.CloudSimExample1" id="cloudSimExample1" />
+    <bean class="example.basic.CloudSimExample2" id="cloudSimExample2" />
+    <bean class="example.basic.CloudSimExample3" id="cloudSimExample3" />
+    <bean class="example.basic.CloudSimExample4" id="cloudSimExample4" />
+    <bean class="example.basic.CloudSimExample5" id="cloudSimExample5" />
+</beans>

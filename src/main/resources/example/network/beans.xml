@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="example.network.NetworkExample1" id="networkExample1"/>
+    <bean class="example.network.NetworkExample2" id="networkExample2"/>
+    <bean class="example.network.NetworkExample3" id="networkExample3"/>
+    <bean class="example.network.NetworkExample4" id="networkExample4"/>
+</beans>
