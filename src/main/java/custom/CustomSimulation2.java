@@ -262,8 +262,9 @@ public class CustomSimulation2 {
      * @param ram    host RAM
      * @param storage host storage
      * @param bw      host bw
+     * @param peList  Pe List
      */
-    public void addHost(int hostId,int ram,long storage,int bw){
+    public void addHost(int hostId,int ram,long storage,int bw,List<Pe> peList){
         if (hostList == null) {
             initHostList();
         }
@@ -271,7 +272,7 @@ public class CustomSimulation2 {
                 new RamProvisionerSimple(ram),
                 new BwProvisionerSimple(bw),
                 storage, peTable.get(hostId),
-                new VmSchedulerSpaceShared(peTable.get(hostId))));
+                new VmSchedulerSpaceShared(peList)));
     }
 
     /**
