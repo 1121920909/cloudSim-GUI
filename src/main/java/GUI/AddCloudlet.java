@@ -3,28 +3,25 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class addHost extends JDialog {
+public class AddCloudlet extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textHostNum;
-    private JTextField textPeNum;
-    private JTextField textRam;
-    private JTextField textPeMips;
-    private JTextField textStorage;
-    private JTextField textBw;
-    private JPanel titlePanel;
-    private JPanel mainPanel;
-    private JPanel buttonPanel;
-    private JLabel titleLabel;
-    private JLabel hostNumLabel;
-    private JLabel peNumLabel;
-    private JLabel peMipsLabel;
-    private JLabel ramLabel;
-    private JLabel storageLabel;
-    private JLabel bwLabel;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JPanel panelTitle;
+    private JPanel panelMain;
+    private JLabel labelTitle;
+    private JLabel labelPeNum;
+    private JLabel labelLength;
+    private JLabel labelFileSize;
+    private JLabel labelOutPutSize;
+    private JLabel labelCloudletNum;
 
-    public addHost() {
+    public AddCloudlet() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -68,7 +65,7 @@ public class addHost extends JDialog {
     }
 
     public static void main(String[] args) {
-        addHost dialog = new addHost();
+        AddCloudlet dialog = new AddCloudlet();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

@@ -5,6 +5,8 @@ import com.sun.javaws.util.JfxHelper;
 import custom.CustomSimulation;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,78 +30,64 @@ public class CustomForm {
     private JLabel costPerMemLabel;
     private JLabel costPerStorageLabel;
     private JLabel costPerBWLabel;
-    private JTextField datacenterNumText;
-    private JButton customDatacentButton;
-    private JTextField vmPeNumText;
-    private JTextField vmMipsText;
-    private JTextField vmRamText;
-    private JTextField vmSizeText;
-    private JTextField vmBwText;
-    private JTextField cloLengthText;
-    private JTextField cloPeNumText;
-    private JTextField cloFileSizeText;
-    private JTextField cloOutputSizeText;
-    private JTextField cloNumText;
-    private JButton simulationButton;
-    private JTextField vmNumText;
 
-    private CustomSimulation simulation;
-    private static JFrame frame = null;
+    /**
+     * 表头
+     */
+    private Object[] hostTableHead;
+
+    /**
+     * host 数据
+     */
+    private Object[][] hostData;
+
+    /**
+     * tableModel
+     */
+    private DefaultTableModel hostTableModel = null;
+
+    /**
+     * host last id
+     */
+    private int HostId = 0;
 
     public CustomForm() {
-        simulation = new CustomSimulation();
-        customDatacentButton.addActionListener(new ActionListener() {
+        hostTableHead = new Object[]{"host id","Pe Number","Pe MIPS","Ram","Storage","BW"};
+        hostData = new Object[][]{};
+        hostTableModel = new DefaultTableModel(hostData,hostTableHead);
+        hostListTable.setModel(hostTableModel);
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CustomDataCenter.showCustomDatacenter(simulation);
+                AddHost.show(getThis());
             }
         });
-        simulationButton.addActionListener(new ActionListener() {
+        //删除选中行
+        deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int datacenterNum;
-                int vmMips;
-                int vmPeNum;
-                int vmRam;
-                int vmBw;
-                long vmSize;
-                int vmNum;
-                long cloudletLength;
-                int cloudletNum;
-                int cloudletPeNum;
-                int cloudletFileSize;
-                int cloudletOutputSize;
-                String bindCloudletToVmsPolicy;
-
-                datacenterNum = Integer.valueOf(datacenterNumText.getText());
-                vmMips = Integer.valueOf(vmMipsText.getText());
-                vmPeNum = Integer.valueOf(vmPeNumText.getText());
-                vmRam = Integer.valueOf(vmRamText.getText());
-                vmBw = Integer.valueOf(vmBwText.getText());
-                vmNum = Integer.valueOf(vmNumText.getText());
-                vmSize = Long.valueOf(vmSizeText.getText());
-                cloudletLength = Long.valueOf(cloLengthText.getText());
-                cloudletNum = Integer.valueOf(cloNumText.getText());
-                cloudletPeNum = Integer.valueOf(cloPeNumText.getText());
-                cloudletFileSize = Integer.valueOf(cloFileSizeText.getText());
-                cloudletOutputSize = Integer.valueOf(cloOutputSizeText.getText());
-
-                simulation.setDatacenterList(datacenterNum);
-                simulation.setVmList(vmNum,vmMips,vmPeNum,vmRam,vmBw,vmSize);
-                simulation.setCloudletList(cloudletLength, cloudletFileSize, cloudletOutputSize, cloudletPeNum, cloudletNum);
-                simulation.simulationStart();
-                ResultForm.show(simulation.formatInfo());
+                int length = hostListTable.getSelectedRowCount();
+                for(int i = 0; i<length;i++){
+                    hostTableModel.removeRow(hostListTable.getSelectedRow());
+                }
             }
         });
     }
 
-    public static void show() {
-        if (frame == null) {
-            frame = new JFrame("CustomForm");
-            frame.setContentPane(new CustomForm().panel);
-            frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        }
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("CustomForm");
+        frame.setContentPane(new CustomForm().panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public void addHostData(int PeNum,long storage,int bw,int mips,int ram){
+        hostTableModel.addRow(new Object[]{HostId,PeNum,mips,ram,storage,bw});
+        HostId++;
+    }
+
+    public CustomForm getThis(){
+        return this;
     }
 }

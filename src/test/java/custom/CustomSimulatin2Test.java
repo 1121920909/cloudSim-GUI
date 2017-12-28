@@ -25,7 +25,7 @@ public class CustomSimulatin2Test {
             peId++;
             cloudletId++;
         }
-        //simulation2.addHost(1,20480,100000,10000);
+        //simulation2.AddHost(1,20480,100000,10000);
         simulation2.createDatacenterCharacteristics(10,10,10,10);
         simulation2.startSimulation();
         System.out.println(simulation2.formatInfo());

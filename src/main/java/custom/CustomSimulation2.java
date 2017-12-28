@@ -326,6 +326,10 @@ public class CustomSimulation2 {
         return broker;
     }
 
+    /**
+     * result string
+     * @return result
+     */
     public String formatInfo(){
         StringBuilder sb = new StringBuilder();
         Cloudlet cloudlet;
