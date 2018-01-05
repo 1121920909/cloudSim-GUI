@@ -4,8 +4,11 @@ import org.cloudbus.cloudsim.Vm;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CustomVm {
+    private JPanel jPanel;
     private JTable tableVmList;
     private JButton buttonDelete;
     private JButton buttonAdd;
@@ -31,6 +34,7 @@ public class CustomVm {
      */
     private DefaultTableModel tableModel;
 
+
     /**
      * vm last id
      */
@@ -40,10 +44,30 @@ public class CustomVm {
         tableHead = new Object[]{"vmid","PeNum","Mips","Ram","BW","Size"};
         VmData = new Object[][]{};
         tableModel = new DefaultTableModel(VmData, tableHead);
+        tableVmList.setModel(tableModel);
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddVm.show(getThis());
+            }
+        });
+        buttonDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int length = tableVmList.getSelectedRowCount();
+                for(int i = 0; i<length;i++){
+                    tableModel.removeRow(tableVmList.getSelectedRow());
+                }
+            }
+        });
     }
 
     public void addVm(int peNum,int mips,int ram,int bw,int size){
         tableModel.addRow(new Object[]{vmid,peNum,mips,ram,bw,size});
         vmid++;
+    }
+
+    private CustomVm getThis(){
+        return this;
     }
 }

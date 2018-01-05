@@ -12,7 +12,7 @@ public class CustomSimulation {
     private JButton customCloudletButton;
     private JButton RUNButton;
     private JLabel customDatacenterLabel;
-    private JLabel customVmLabel;
+    private JLabel ustomVmLabel;
     private JLabel customCloudletLabel;
     private JLabel vmNumLabel;
     private JLabel CloudletNumLabel;

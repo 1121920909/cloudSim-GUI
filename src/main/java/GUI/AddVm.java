@@ -25,19 +25,23 @@ public class AddVm extends JDialog {
     private JLabel labelBw;
     private JLabel labelSize;
 
+    private CustomVm customVm;
 
-    public AddVm() {
+    public AddVm(CustomVm customVm) {
+        this.customVm = customVm;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -46,6 +50,7 @@ public class AddVm extends JDialog {
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
@@ -53,6 +58,7 @@ public class AddVm extends JDialog {
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -61,7 +67,17 @@ public class AddVm extends JDialog {
 
     private void onOK() {
         // add your code here
-        dispose();
+        int vmNum = Integer.valueOf(textVmNum.getText());
+        int peNum = Integer.valueOf(textPeNum.getText());
+        int mips = Integer.valueOf(textMips.getText());
+        int size = Integer.valueOf(textSize.getText());
+        int ram = Integer.valueOf(textRam.getText());
+        int bw = Integer.valueOf(textBw.getText());
+
+        for (int i = 0; i < vmNum; i ++) {
+            customVm.addVm(peNum,mips,ram,bw,size);
+        }
+            dispose();
     }
 
     private void onCancel() {
@@ -69,10 +85,10 @@ public class AddVm extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        AddVm dialog = new AddVm();
+    public static void show(CustomVm customVm) {
+        AddVm dialog = new AddVm(customVm);
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+       // System.exit(0);
     }
 }

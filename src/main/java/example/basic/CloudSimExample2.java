@@ -52,8 +52,6 @@ public class CloudSimExample2 extends BasicExample {
         resultCloudletList = datacenterBroker.getCloudletReceivedList();
         //stop simulation
         CloudSim.stopSimulation();
-
-
     }
 }
 
