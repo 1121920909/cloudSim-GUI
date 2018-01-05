@@ -1,20 +1,19 @@
-package GUI;
+package GUI.custom;
 
-import GUI.CustomDataCenter;
-import com.sun.javaws.util.JfxHelper;
-import custom.CustomSimulation;
+import GUI.CustomSimulation;
+import GUI.custom.add.AddHost;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
-public class CustomForm {
+public class CustomCenter {
     private JPanel panel;
     private JPanel titlePanel;
-    private JPanel HostPanel;
-    private JPanel DatacenterCharacteristicsPanel;
+    private JPanel hostPanel;
+    private JPanel datacenterCharacteristicsPanel;
     private JPanel okPanel;
     private JLabel titleLabel;
     private JButton okButton;
@@ -31,6 +30,8 @@ public class CustomForm {
     private JLabel costPerStorageLabel;
     private JLabel costPerBWLabel;
 
+    private JFrame frame = null;
+    private CustomSimulation customSimulation;
     /**
      * 表头
      */
@@ -49,20 +50,22 @@ public class CustomForm {
     /**
      * host last id
      */
-    private int HostId = 0;
+    private int hostId = 0;
 
-    public CustomForm() {
+    public CustomCenter(CustomSimulation customSimulation) {
+        this.customSimulation = customSimulation;
         hostTableHead = new Object[]{"host id","Pe Number","Pe MIPS","Ram","Storage","BW"};
         hostData = new Object[][]{};
         hostTableModel = new DefaultTableModel(hostData,hostTableHead);
         hostListTable.setModel(hostTableModel);
+        //add button listener
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddHost.show(getThis());
+                AddHost.show(CustomCenter.this);
             }
         });
-        //删除选中行
+        //delete button listener
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,24 +73,44 @@ public class CustomForm {
                 for(int i = 0; i<length;i++){
                     hostTableModel.removeRow(hostListTable.getSelectedRow());
                 }
+                Object[] array = hostTableModel.getDataVector().toArray();
+                //重置hostId
+                int hostId = 0;
+                for (Object o : array) {
+                    Vector v = (Vector) o;
+                    v.set(0,hostId);
+                    hostId++;
+                }
+                //修改最后hostId
+                CustomCenter.this.hostId = hostId;
             }
         });
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("CustomForm");
-        frame.setContentPane(new CustomForm().panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    public void show() {
+        if (frame == null) {
+            frame = new JFrame("CustomCenter");
+            frame.setContentPane(this.panel);
+            frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            frame.pack();
+        }
+        if (!frame.isVisible()){
+            frame.setVisible(true);
+        }
     }
+
 
     public void addHostData(int PeNum,long storage,int bw,int mips,int ram){
-        hostTableModel.addRow(new Object[]{HostId,PeNum,mips,ram,storage,bw});
-        HostId++;
+        hostTableModel.addRow(new Object[]{hostId,PeNum,mips,ram,storage,bw});
+        hostId++;
     }
 
-    public CustomForm getThis(){
-        return this;
+    public Object[] getHostData() {
+        return hostTableModel.getDataVector().toArray();
+    }
+
+    public double[] getCenterCharacteristicsData() {
+        return new double[]{Double.valueOf(costPerBWText.getText()),Double.valueOf(costPerMemText.getText()),
+                Double.valueOf(costPerSecText.getText()),Double.valueOf(costPerStorageText.getText())};
     }
 }

@@ -1,4 +1,6 @@
-package GUI;
+package GUI.custom.add;
+
+import GUI.custom.CustomCloudlet;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -7,11 +9,11 @@ public class AddCloudlet extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
+    private JTextField textCloudletNum;
+    private JTextField textPeNum;
+    private JTextField textFileSize;
+    private JTextField textOutputSize;
+    private JTextField textLength;
     private JPanel panelTitle;
     private JPanel panelMain;
     private JLabel labelTitle;
@@ -21,18 +23,22 @@ public class AddCloudlet extends JDialog {
     private JLabel labelOutPutSize;
     private JLabel labelCloudletNum;
 
-    public AddCloudlet() {
+    private CustomCloudlet customCloudlet;
+
+    public AddCloudlet(CustomCloudlet customCloudlet) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -48,14 +54,27 @@ public class AddCloudlet extends JDialog {
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        this.customCloudlet = customCloudlet;
     }
 
     private void onOK() {
         // add your code here
+
+        int cloudletNum = Integer.valueOf(textCloudletNum.getText());
+        int peNum = Integer.valueOf(textPeNum.getText());
+        long length = Long.valueOf(textLength.getText());
+        long fileSize = Long.valueOf(textFileSize.getText());
+        long outputSize = Long.valueOf(textOutputSize.getText());
+
+        for (int i = 0; i < cloudletNum; i++) {
+            customCloudlet.addCloudlet(length,fileSize,outputSize,peNum);
+        }
         dispose();
     }
 
@@ -64,10 +83,10 @@ public class AddCloudlet extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        AddCloudlet dialog = new AddCloudlet();
+    public static void show(CustomCloudlet customCloudlet) {
+        AddCloudlet dialog = new AddCloudlet(customCloudlet);
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
     }
+
 }

@@ -1,7 +1,8 @@
-package GUI;
+package GUI.custom.add;
+
+import GUI.custom.CustomVm;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
 public class AddVm extends JDialog {
@@ -70,7 +71,7 @@ public class AddVm extends JDialog {
         int vmNum = Integer.valueOf(textVmNum.getText());
         int peNum = Integer.valueOf(textPeNum.getText());
         int mips = Integer.valueOf(textMips.getText());
-        int size = Integer.valueOf(textSize.getText());
+        long size = Long.valueOf(textSize.getText());
         int ram = Integer.valueOf(textRam.getText());
         int bw = Integer.valueOf(textBw.getText());
 

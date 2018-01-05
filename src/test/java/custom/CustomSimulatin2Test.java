@@ -1,8 +1,6 @@
 package custom;
 
-import com.sun.javafx.collections.NonIterableChange;
 import org.cloudbus.cloudsim.Vm;
-import org.cloudbus.cloudsim.core.CloudSim;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ public class CustomSimulatin2Test {
         int vmId = 0;
         int cloudletId = 0;
         List<Vm> vmList = new ArrayList<>();
-        CustomSimulation2 simulation2 = new CustomSimulation2();
+        CustomSimulation simulation2 = new CustomSimulation();
         for (int i = 0; i < 8; i++){
 
         }

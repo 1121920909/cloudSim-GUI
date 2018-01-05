@@ -1,4 +1,6 @@
-package GUI;
+package GUI.custom.add;
+
+import GUI.custom.CustomCenter;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -25,9 +27,9 @@ public class AddHost extends JDialog {
     private JLabel bwLabel;
 
     /**
-     * CustomForm
+     * CustomCenter
      */
-    private CustomForm customForm;
+    private CustomCenter customCenter;
     public AddHost() {
         setContentPane(contentPane);
         setModal(true);
@@ -74,7 +76,7 @@ public class AddHost extends JDialog {
         int ram = Integer.valueOf(textRam.getText());
 
         for(int i = 0; i < hostNum; i++) {
-            customForm.addHostData(peNum,storage,bw,peMips,ram);
+            customCenter.addHostData(peNum,storage,bw,peMips,ram);
         }
         dispose();
     }
@@ -84,9 +86,9 @@ public class AddHost extends JDialog {
         dispose();
     }
 
-    public static void show(CustomForm customForm){
+    public static void show(CustomCenter customCenter){
         AddHost dialog = new AddHost();
-        dialog.customForm = customForm;
+        dialog.customCenter = customCenter;
         dialog.pack();
         dialog.setVisible(true);
         //System.exit(0);

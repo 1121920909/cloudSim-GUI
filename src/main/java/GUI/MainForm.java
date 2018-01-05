@@ -28,7 +28,7 @@ public class MainForm {
         simulationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //CustomForm.show();
+                //CustomCenter.show();
             }
         });
     }

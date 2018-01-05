@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.AddCloudlet">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.custom.add.AddCloudlet">
   <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
@@ -123,7 +123,7 @@
                   <text value="Cloudlet Number"/>
                 </properties>
               </component>
-              <component id="3caaf" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="3caaf" class="javax.swing.JTextField" binding="textCloudletNum">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -131,7 +131,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="8a0ed" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+              <component id="8a0ed" class="javax.swing.JTextField" binding="textPeNum">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -139,7 +139,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="cebf5" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+              <component id="cebf5" class="javax.swing.JTextField" binding="textFileSize">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -147,7 +147,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="dca73" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+              <component id="dca73" class="javax.swing.JTextField" binding="textOutputSize">
                 <constraints>
                   <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -155,7 +155,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="7ce60" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+              <component id="7ce60" class="javax.swing.JTextField" binding="textLength">
                 <constraints>
                   <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
