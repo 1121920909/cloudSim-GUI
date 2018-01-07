@@ -79,6 +79,13 @@ public class CustomVm {
                 CustomVm.this.vmid = vmId;
             }
         });
+        buttonOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customSimulation.setVmNum(vmid + 1);
+                frame.setVisible(false);
+            }
+        });
     }
 
     public void show() {

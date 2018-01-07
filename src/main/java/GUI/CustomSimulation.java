@@ -167,6 +167,14 @@ public class CustomSimulation {
     frame.setVisible(true);
   }
 
+  public void setVmNum(int vmNum) {
+    vmNumLabel.setText("Vm Num:" + vmNum);
+  }
+
+  public void setCloudletNum(int cloudletNum) {
+    cloudletNumLabel.setText("Cloudlet Num:" + cloudletNum);
+  }
+
   public static void main(String[] args) {
     JFrame frame = new JFrame("CustomSimulation");
     frame.setContentPane(new CustomSimulation().panel);

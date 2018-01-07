@@ -4,6 +4,8 @@ import GUI.CustomSimulation;
 import GUI.custom.add.AddHost;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,6 +85,13 @@ public class CustomCenter {
                 }
                 //修改最后hostId
                 CustomCenter.this.hostId = hostId;
+            }
+        });
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //数据效验
+                frame.setVisible(false);
             }
         });
     }

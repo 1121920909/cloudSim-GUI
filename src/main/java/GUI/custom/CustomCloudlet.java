@@ -4,10 +4,13 @@ import GUI.CustomSimulation;
 import GUI.custom.add.AddCloudlet;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 public class CustomCloudlet {
     private JTable tableCloudletList;
@@ -28,6 +31,7 @@ public class CustomCloudlet {
     private Object[] header;
     private Object[][] cloudletData;
 
+    private Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
 
     /**
      * 最后一个cloudlet的ID
@@ -39,6 +43,15 @@ public class CustomCloudlet {
         header = new Object[]{"id","PENum","length","File Size","OUTPUT Size"};
         cloudletData = new Object[][]{};
         cloudletTableModel = new DefaultTableModel(cloudletData, header);
+        cloudletTableModel.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+                String s = (String) cloudletTableModel.getValueAt(row,column);
+
+            }
+        });
         tableCloudletList.setModel(cloudletTableModel);
         //delete button listener
         buttonDelete.addActionListener(new ActionListener() {
@@ -85,6 +98,13 @@ public class CustomCloudlet {
                 }*/
             }
         });
+        buttonOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customSimulation.setCloudletNum(lastCloudletId + 1);
+                frame.setVisible(false);
+            }
+        });
     }
 
     public void addCloudlet(long length,long fileSize,long outputSize,int peNum) {
@@ -104,8 +124,21 @@ public class CustomCloudlet {
         }
     }
 
+
+
     public Object[] getCloudletData() {
         return cloudletTableModel.getDataVector().toArray();
     }
 
+    private boolean isNumber(String s) {
+        return pattern.matcher(s).matches();
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("CustomCloudlet");
+        frame.setContentPane(new CustomCloudlet(new CustomSimulation()).jPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }

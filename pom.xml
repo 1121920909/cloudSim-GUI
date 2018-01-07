@@ -26,7 +26,7 @@
                 <artifactId>cloudsim</artifactId>
                 <version>4.0</version>
                 <scope>system</scope>
-                <systemPath>D:/Core/cloudsim-cloudsim-4.0/cloudsim-cloudsim-4.0/modules/cloudsim/target/cloudsim-4.0.jar</systemPath>
+                <systemPath>${project.basedir}/src/main/resources/lib/cloudsim-4.0.jar</systemPath>
             </dependency>
       
             <dependency>
